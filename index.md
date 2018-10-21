@@ -27,7 +27,7 @@ y disfrutar de la experiencia extra que supone degustar un videojuego en compañ
 
 ## Arquitectura
 
-Se pretende realizar un despliegue en la nube utilizando una arquitectura basada en
+Se pretende realizar un despliegue en la nube utilizando para ello una arquitectura basada en
 microservicios. De esta forma tenemos la psibilidad de dar un servicio grande
 presentándolo como un conjunto de pequeños servicios (microservicios) que funcionan
 de una forma totalmente independiente.
