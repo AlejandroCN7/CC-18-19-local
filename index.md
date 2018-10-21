@@ -1,4 +1,4 @@
-# Servicio de búsqueda para de jugadores de todo tipo de videojuegos
+# Servicio de búsqueda para jugadores de videojuegos
 
 ## Descripción del problema
 
@@ -14,6 +14,8 @@ electrónicos se han ido poniendo de moda en los últimos años. Por consiguient
 se ha planteado dar un servicio específico para este tipo de jugadores en este
 proyecto.
 
+## Descripción de la solución
+
 La idea consiste en crear una **plataforma** en la cual puedan **registrarse** los
 jugadores de videojuegos especificando sus datos (nombre, edad, plataforma de juego, etc).
 Entonces, el jugador en cuestión tendrá la posibilidad de especificar a qué videojuegos
@@ -22,3 +24,10 @@ está jugando en la actualidad y con qué frecuencia. A su vez, se desarrollará
 videojuego en concreto al que esté jugando. Con ello permitiremos que jugadores
 con gustos y objetivos similares dentro de un videojuego puedan ponerse en **contacto**
 y disfrutar de la experiencia extra que supone degustar un videojuego en compañía.
+
+## Arquitectura
+
+Se pretende realizar un despliegue en la nube utilizando una arquitectura basada en
+microservicios. De esta forma tenemos la psibilidad de dar un servicio grande
+presentándolo como un conjunto de pequeños servicios (microservicios) que funcionan
+de una forma totalmente independiente.
