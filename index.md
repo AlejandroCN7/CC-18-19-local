@@ -31,3 +31,6 @@ Se pretende realizar un despliegue en la nube utilizando para ello una arquitect
 microservicios. De esta forma tenemos la psibilidad de dar un servicio grande
 presentándolo como un conjunto de pequeños servicios (microservicios) que funcionan
 de una forma totalmente independiente.
+
+El proyecto se realizará utilizando esencialmente como lenguaje de programación
+Python.
