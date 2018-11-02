@@ -47,7 +47,7 @@ de una forma totalmente independiente (aunque luego se comuniquen y colaboren en
 
 - Gestión de usuarios (Sing up, log in, modificación del perfil de usuario...).
 
-- Gestión de la base de datos MongoDb.
+- Gestión de la base de datos MongoDB.
 
 - Microservicio de búsqueda de jugadores por criterio.
 
