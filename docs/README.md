@@ -155,6 +155,20 @@ Cada vez que actualizamos el repositorio a partir de este momento debería de ap
 
 ![Test de Travis](figuras/hito2/Travis.png)
 
+### Vinculación con Heroku
+
+Para vincular con Heroku podemos hacerlo de dos formas principalmente: desde su interfaz en su página web o desde la terminal (yo lo he hecho en Ubuntu 18.04 LTS) instalando Heroku CLI. El tema de crear el proyecto lo he realizado de las dos formas y es algo sencillo.
+
+Una vez tenemos creado el proyecto de Heroku debemos de vincularlo con nuestra Github, especificando el repositorio concreto con el que queremos que se vincule. Entonces, tendremos la posibilidad de activar el despliegue automático cada vez que actualicemos el repositorio. Sin embargo, es muy importante marcar la opción en la que pone "Wait for CI to pass before deploy" para que no se despliegue en caso de que no pase los tests en Travis. ¿Sino para que he empleado tiempo en hacerlo?
+
+![Despliegue automático](figuras/hito2/HerokuDespliegue.png)
+
+A partir de ahora, cada vez que actualicemos el repositorio debería de desplegarse en Heroku. Podemos ver el proceso de este despliegue desde la interfaz de Heroku o desde Github accediendo en la pestaña llamada "environments" como se aprecia en la siguiente imagen:
+
+![Github Environments](figuras/hito2/Entornos.png)
+
+
+
 ## Licencia
 
 ---
