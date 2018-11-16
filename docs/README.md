@@ -171,6 +171,10 @@ A partir de ahora, cada vez que actualicemos el repositorio debería de desplega
 
 El provisionamiento se realizará con [Ansible](https://www.ansible.com/).
 
+## Orquestación
+
+Hitos futuros
+
 ## Licencia
 
 ---
