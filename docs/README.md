@@ -167,7 +167,9 @@ A partir de ahora, cada vez que actualicemos el repositorio debería de desplega
 
 ![Github Environments](figuras/hito2/Entornos.png)
 
+## Provisionamiento
 
+El provisionamiento se realizará con [Ansible](https://www.ansible.com/).
 
 ## Licencia
 
