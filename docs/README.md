@@ -173,7 +173,11 @@ El provisionamiento se realizará con [Ansible](https://www.ansible.com/).
 
 ## Orquestación
 
-Hitos futuros
+Hitos futuros.
+
+## Contenedores
+
+Hitos futuros.
 
 ## Licencia
 
