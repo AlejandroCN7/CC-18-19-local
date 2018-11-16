@@ -16,6 +16,7 @@ class TestModel(unittest.TestCase):
 
     # respuesta.headers para consultar el tipo MIME del contenido
     # respuesta.status_code para saber el código de la cabecera de respuesta.
+    #NOTA: LOS TEST SE EJECUTAN EN ORDEN ALFABÉTICO, NO SECUENCIAL
     def test1GetRaiz(self):
         
         respuesta = self.app.get('/')
