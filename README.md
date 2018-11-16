@@ -149,13 +149,13 @@ Como ya sabemos, realizamos los test con Unittest. Sin embargo, queremos automat
 
 Para conseguir esto, he vinculado la cuenta de Github con Travis a través de su página web y he especificado los repositorios que quiero que revise cada vez que los actualice como se aprecia en la siguiente imagen.
 
-![Travis enlace Github](figuras/hito2/TravisConfig.png)
+![Travis enlace Github](docs/figuras/hito2/TravisConfig.png)
 
 Sin embargo, esto no es suficiente. Debemos de especificarle a Travis donde están los archivos que contienen los tests y como debe ejecutarlos para poder comprobarlos. Supongo que esto se puede considerar también parte de la infraestructura. Para ello he creado el archivo [.travis.yml](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/.travis.yml) en la raíz del repositorio. De esta forma Travis siempre ejecuta este archivo y ve que tiene que utilizar Python para ejecutar test_model.py t test_web-py con unittest.
 
 Cada vez que actualizamos el repositorio a partir de este momento debería de aparecer en la página web de Travis algo parecido a la siguiente imagen si todo ha salido bien.
 
-![Test de Travis](figuras/hito2/Travis.png)
+![Test de Travis](docs/figuras/hito2/Travis.png)
 
 ### Vinculación con Heroku
 
@@ -163,11 +163,11 @@ Para vincular con Heroku podemos hacerlo de dos formas principalmente: desde su 
 
 Una vez tenemos creado el proyecto de Heroku debemos de vincularlo con nuestra Github, especificando el repositorio concreto con el que queremos que se vincule. Entonces, tendremos la posibilidad de activar el despliegue automático cada vez que actualicemos el repositorio. Sin embargo, es muy importante marcar la opción en la que pone "Wait for CI to pass before deploy" para que no se despliegue en caso de que no pase los tests en Travis. ¿Sino para que he empleado tiempo en hacerlo?
 
-![Despliegue automático](figuras/hito2/HerokuDespliegue.png)
+![Despliegue automático](docs/figuras/hito2/HerokuDespliegue.png)
 
 A partir de ahora, cada vez que actualicemos el repositorio debería de desplegarse en Heroku. Podemos ver el proceso de este despliegue desde la interfaz de Heroku o desde Github accediendo en la pestaña llamada "environments" como se aprecia en la siguiente imagen:
 
-![Github Environments](figuras/hito2/Entornos.png)
+![Github Environments](docs/figuras/hito2/Entornos.png)
 
 ## Provisionamiento
 
