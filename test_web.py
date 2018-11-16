@@ -143,6 +143,6 @@ class TestModel(unittest.TestCase):
         contenido = obtenerContenidoPaquete(respuesta)
         self.assertEqual(contenido['jugador2']['Nick'], "EjemploPut2", "El segundo jugador no es el que se esperaba")
 
-
+# Para que se ejecuten los tests
 if __name__ == '__main__':
     unittest.main()
