@@ -17,7 +17,7 @@
       - name: Clonando repositorio github
         become: false
         git:
-          repo: 'https://github.com/AlejandroCN7/Ejercicios_CC.git'
+          repo: 'https://github.com/AlejandroCN7/Proyecto-Cloud-Computing.git'
           clone: yes
           dest: /home/Alejandro/proyecto
 
