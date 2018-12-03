@@ -1,0 +1,7 @@
+[vagrantboxes]
+jessie64 ansible_ssh_port=2222 ansible_ssh_private_key_file=./maquinasVirtuales/.vagrant/machines/default/virtualbox/private_key
+Debian9 ansible_ssh_port=22 ansible_ssh_private_key_file=~/.ssh/id_rsa 
+
+[vagrantboxes:vars]
+ansible_ssh_user=Alejandro
+ansible_ssh_host=13.93.33.13
