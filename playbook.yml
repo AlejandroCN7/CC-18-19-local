@@ -1,0 +1,89 @@
+---
+  - hosts: Debian9
+    become: yes
+    pre_tasks:
+      - name: Instala git
+        apt:
+          pkg: git
+          state: present
+
+      - name: Instalando herramientas necesarias
+        sudo: yes
+        apt:
+          pkg: [wget,curl,python-minimal,python-setuptools,python-pip,python3-pip]
+          state: present
+
+    tasks:
+      - name: Clonando repositorio github
+        become: false
+        git:
+          repo: 'https://github.com/AlejandroCN7/Ejercicios_CC.git'
+          clone: yes
+          dest: /home/Alejandro/proyecto
+
+      - name: Instalando dependencias del proyecto
+        pip:
+          requirements: /home/Alejandro/proyecto/requirements.txt
+          executable: pip3
+
+      - name: Creando /etc/systemd/system/rc-local.service
+        become: true
+        blockinfile:
+          create: yes
+          path: /etc/systemd/system/rc-local.service
+          block: |
+            [Unit]
+            Description=/etc/rc.local Compatibility
+            ConditionPathExists=/etc/rc.local
+
+            [Service]
+            Type=forking
+            ExecStart=/etc/rc.local start
+            TimeoutSec=0
+            StandardOutput=tty
+            RemainAfterExit=yes
+            SysVStartPriority=99
+
+            [Install]
+            WantedBy=multi-user.target
+
+      - name: Creando /etc/rc.local
+        become: true
+        blockinfile:
+          create: yes
+          path: /etc/rc.local
+          marker: null
+          block: |
+            #!/bin/sh -e
+            #
+            # rc.local
+            #
+            # This script is executed at the end of each multiuser runlevel.
+            # Make sure that the script will "exit 0" on success or any other
+            # value on error.
+            #
+            # In order to enable or disable this script just change the execution
+            # bits.
+            #
+            # By default this script does nothing.
+
+            exit 0
+
+      - name: Redirigiendo puertos
+        become: true
+        lineinfile:
+          path: /etc/rc.local
+          insertbefore: 'exit 0'
+          line: "sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 5000"
+
+      - name: Dando permisos
+        become: true
+        raw: chmod +x /etc/rc.local
+
+      - name: systemctl enable rc-local
+        become: true
+        raw: systemctl enable rc-local
+
+      - name: systemctl start rc-local.service
+        become: true
+        raw: systemctl start rc-local.service
