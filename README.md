@@ -170,7 +170,13 @@ A partir de ahora, cada vez que actualicemos el repositorio debería de desplega
 
 ## Provisionamiento
 
-El provisionamiento se realizará con [Ansible](https://www.ansible.com/).
+En este apartado hablaremos del provisionamiento automático de máquinas virtuales a través de [Ansible](https://www.ansible.com/). Ansible la entiendo como una herramienta software de administración y manejo de máquinas virtuales. En este punto se pretende ir un paso más hayá y provisionarlas de las herramientas necesarias para poder proporcionar el servicio web que se pretende en este proyecto.
+
+### Mejoras realizadas en el proyecto
+
+### Vagrant
+
+### Azure
 
 ## Orquestación
 
