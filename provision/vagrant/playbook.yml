@@ -1,0 +1,27 @@
+---
+  - hosts: all
+    become: yes
+    pre_tasks:
+      - name: Instala git
+        apt:
+          pkg: git
+          state: present
+
+      - name: Instalando herramientas necesarias
+        sudo: yes
+        apt:
+          pkg: [wget,curl,python-minimal,python-setuptools,python-pip,python3-pip]
+          state: present
+
+    tasks:
+      - name: Clonando repositorio github
+        become: false
+        git:
+          repo: 'https://github.com/AlejandroCN7/Proyecto-Cloud-Computing.git'
+          clone: yes
+          dest: /home/vagrant/proyecto
+
+      - name: Instalando dependencias del proyecto
+        pip:
+          requirements: /home/Alejandro/proyecto/requirements.txt
+          executable: pip3
