@@ -22,6 +22,7 @@
           dest: /home/vagrant/proyecto
 
       - name: Instalando dependencias del proyecto
+        become: false
         pip:
           requirements: /home/vagrant/proyecto/requirements.txt
           executable: pip3
