@@ -23,5 +23,5 @@
 
       - name: Instalando dependencias del proyecto
         pip:
-          requirements: /home/Alejandro/proyecto/requirements.txt
+          requirements: /home/vagrant/proyecto/requirements.txt
           executable: pip3
