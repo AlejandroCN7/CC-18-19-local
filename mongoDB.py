@@ -1,11 +1,15 @@
 import pymongo
 
 class BaseDatos:
-    def __init__(self,direccion):
+    def __init__(self,direccion,prueba=False):
         MONGODB_URI = direccion
         client = pymongo.MongoClient(MONGODB_URI, connectTimeoutMS=40000)
         db = client.get_database()
-        self.jugadores = db.jugadores
+        if(prueba):
+            self.jugadores = db.prueba
+        else:
+            self.jugadores = db.jugadores
+
 
 
     def getJugador(self,jugador_nick):
