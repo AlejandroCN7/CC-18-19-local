@@ -8,7 +8,7 @@
 
 **Universidad: Universidad de Granada (UGR)**
 
-se puede acceder también a través de este [enlace](https://alejandrocn7.github.io/Proyecto-Cloud-Computing/).
+Se puede acceder a la documentación completa en este [enlace](https://alejandrocn7.github.io/Proyecto-Cloud-Computing/).
 
 ## Descripción del problema
 
@@ -224,7 +224,7 @@ He elegido Azure para realizar el despliegue de la máquina debido a que JJ nos 
 
 Lo primero que hay que hacer una vez nos registramos en Azure es crear nuestra máquina virtual "virgen", es decir, sin nada instalado. Para ello he utilizado la propia interfaz de la página. En un principio, había instalado en ella el sistama operativo Debian 9 para servidores. Sinceramente, no lo hice por ningún motivo especial, simplemente porque aun estaba realizando pruebas y fue el primero que se me vino a la cabeza.
 
-Entonces, como se puede ver en el [antiguo estado de playbook.yml para azure](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/commit/1ed355fad1aceef9a691fc4093b10480474b798c) me dió muchos problemas para poder redirigir el puerto 5000 al 80. Y aún así, seguía teniendo problemas con eso. Por ello, decidí cambiarme a [Ubuntu Server 16.04 LTS]().
+Entonces, como se puede ver en el [antiguo estado de playbook.yml para azure](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/commit/1ed355fad1aceef9a691fc4093b10480474b798c) me dió muchos problemas para poder redirigir el puerto 5000 al 80. Y aún así, seguía teniendo problemas con eso. Por ello, decidí cambiarme a Ubuntu Server 16.04 LTS.
 
 Esta vez si me pensé mejor cual era el SO que quería correr en mi máquina virtual. Las principales cuestiones por las que elegí Ubuntu Server es porque estoy familiarizado a su funcionamiento gracias a la asignatura de Ingeniería de Servidores en el Grado en Ingeniería Informática de la Universidad de Granada. Además, es estos sistemas ya tenemos instalado python2 y python3 preinstalado, por lo que nos ahorra parte del trabajo.
 
