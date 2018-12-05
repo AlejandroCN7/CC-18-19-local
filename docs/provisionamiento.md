@@ -3,7 +3,7 @@
 ---
 MV: 51.145.137.107
 
-En este apartado hablaremos del provisionamiento automático de máquinas virtuales a través de [Ansible](https://www.ansible.com/). Entiendo a Ansible como una herramienta software de administración y manejo de máquinas virtuales. En este punto se pretende ir un paso más allá y provisionarlas de las herramientas necesarias para poder proporcionar el servicio web que se pretende en este proyecto. He decidido utilizar Ansible y no otra alternativa debido a que nuestro profesor de Cloud Computing, JJ Melero, decidió hacer un seminario sobre esta herramienta ([enlace al seminario](https://www.youtube.com/watch?v=gFd9aj78_SM&t=1277s)). Este seminario se realizó más o menos en un margen temporal cercano al comienzo de este hito, por lo que me ha resultado de gran utilidad. 
+En este apartado hablaremos del provisionamiento automático de máquinas virtuales a través de [Ansible](https://www.ansible.com/). Entiendo a Ansible como una herramienta software de administración y manejo de máquinas virtuales. En este punto se pretende ir un paso más allá y provisionarlas de las herramientas necesarias para poder proporcionar el servicio web que se pretende en este proyecto. He decidido utilizar Ansible y no otra alternativa debido a que nuestro profesor de Cloud Computing, JJ Melero, decidió hacer un seminario sobre esta herramienta ([enlace al seminario](https://www.youtube.com/watch?v=gFd9aj78_SM&t=1277s)). Este seminario se realizó más o menos en un margen temporal cercano al comienzo de este hito, por lo que me ha resultado de gran utilidad.
 
 ### Mejoras realizadas en el proyecto
 
@@ -29,7 +29,7 @@ En su interior le especificamos una única máquina llamada debian9Vagrant la cu
 
 De esta forma ansible tiene todo lo necesario para comunicarse y acceder a la máquina virtual que hemos creado, aunque podría ser más de una.
 
-![acceso a la máquina vagrant a través de Ansible](docs/figuras/hito3/vagrant.png)
+![acceso a la máquina vagrant a través de Ansible](figuras/hito3/vagrant.png)
 
 El siguiente paso es realizar un guión con el que ansible pudiera hacer un provisionamiento automático a la o las máquinas.
 
@@ -40,7 +40,7 @@ Para ellos se utilizan los playbooks, en mi caso he creado [playbook.yml](https:
 - Clonar este repositorio de github (sin permisos de superusuario)
 - Instalar dependencias de los servicios que proporcionamos para pip ([requirements.txt](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/requirements.txt))
 
-![Provisionamiento de vagrant con Ansible](docs/figuras/hito3/provisionamiento-vagrant.png)
+![Provisionamiento de vagrant con Ansible](figuras/hito3/provisionamiento-vagrant.png)
 
 Mencionar que salen estados OK porque ya lo había ejecutado antes, por lo que ya lo tiene instalado en la máquina y no lo vuelve a hacer, solo lo comprueba.
 
@@ -64,7 +64,7 @@ Finalmente se ha creado el [playbook.yml](https://github.com/AlejandroCN7/Proyec
 
 El siguiente paso ha sido entrar en la carpeta del repositorio [azure](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/tree/master/provision/azure) dentro de [provision](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/tree/master/provision) y ejecutar el playbook para que ansible provisione automáticamente nuestra máquina de Azure.
 
-![Provisionamiento de Azure con Ansible](docs/figuras/hito3/provisionamiento-azure.png)
+![Provisionamiento de Azure con Ansible](figuras/hito3/provisionamiento-azure.png)
 
 Una vez realizado el provisionamiento accedí a la máquina virtual de Azure introduciendo:
 
@@ -76,11 +76,11 @@ Y una vez dentro probé a arrancar el servicio por medio del comando:
 
 Aunque especifique el puerto 5000, como en el provisionamiento se realizó la redirección del puerto debería de estar disponible también en el puerto 80. Lo comprobé accediendo a esa IP con ese puerto por medio del navegador:
 
-![Puesta en marcha del servicio](docs/figuras/hito3/servicio-azure.png)
+![Puesta en marcha del servicio](figuras/hito3/servicio-azure.png)
 
-![Acceso a ruta raíz](docs/figuras/hito3/prueba-azure.png)
+![Acceso a ruta raíz](figuras/hito3/prueba-azure.png)
 
-![Acceso a ruta jugadores](docs/figuras/hito3/prueba2-azure.png)
+![Acceso a ruta jugadores](figuras/hito3/prueba2-azure.png)
 
 Con ello demostramos que el provisionamiento se ha realizado correctamente y que desde ese momento nuesta máquina virtual está lista para poder trabajar y realizar el servicio diseñado hasta la fecha en nuestro proyecto a través de la nube.
 
