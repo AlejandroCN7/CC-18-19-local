@@ -171,6 +171,8 @@ A partir de ahora, cada vez que actualicemos el repositorio debería de desplega
 ## Provisionamiento
 
 ---
+MV: 51.145.137.107
+
 En este apartado hablaremos del provisionamiento automático de máquinas virtuales a través de [Ansible](https://www.ansible.com/). Entiendo a Ansible como una herramienta software de administración y manejo de máquinas virtuales. En este punto se pretende ir un paso más hayá y provisionarlas de las herramientas necesarias para poder proporcionar el servicio web que se pretende en este proyecto. He decidido utilizar Ansible y no otra alternativa debido a que nuestro profesor de Cloud Computing, JJ Melero, decidió hacer un seminario sobre esta herramienta ([enlace al seminario](https://www.youtube.com/watch?v=gFd9aj78_SM&t=1277s)). Este seminario se realizó más o menos en un margen temporal cercano al comienzo de este hito, por lo que me ha resultado de gran utilidad.
 
 ### Mejoras realizadas en el proyecto
@@ -226,7 +228,32 @@ Entonces, como se puede ver en el [antiguo estado de playbook.yml para azure]() 
 
 Esta vez si me pensé mejor cual era el SO que quería correr en mi máquina virtual. Las principales cuestiones por las que elegí Ubuntu Server es porque estoy familiarizado a su funcionamiento gracias a la asignatura de Ingeniería de Servidores en el Grado en Ingeniería Informática de la Universidad de Granada. Además, es estos sistemas ya tenemos instalado python2 y python3 preinstalado, por lo que nos ahorra parte del trabajo.
 
-El archivo [ansible.cfg]() es igual al explicado anteriormente.
+El archivo [ansible.cfg]() es igual al explicado anteriormente con Vagrant. El archivo [ansible_hosts]() solo ha sido modificado con el nombre de la máquina de Azure (solo por comodidad, para Ansible no tiene por qué tener el mismo nombre) y con el usuario e IP pública de la misma.
+
+Finalmente se ha creado el [playbook.yml]() el cual es muy parecido al explicado con Vagrant pero difiere en algunas cosas. Digamos que instala las dependecias y clona este repositorio de la misma forma que lo hace Vagrant, pero aquí hemos tenido en cuenta la redirección de puertos. De esta forma, se tiene acceso también por el puerto 80 que era uno de los requisitos de este hito.
+
+El siguiente paso ha sido entrar en la carpeta del repositorio [azure]() dentro de [provision]() y ejecutar el playbook para que ansible provisione automáticamente nuestra máquina de Azure.
+
+![Provisionamiento de Azure con Ansible](docs/figuras/hito3/provisionamiento-azure.png)
+
+Una vez realizado el provisionamiento accedí a la máquina virtual de Azure introduciendo:
+
+`ssh Alejandro@51.145.137.107`
+
+Y una vez dentro probé a arrancar el servicio por medio del comando:
+
+`gunicorn -b :5000 principal:app`
+
+Aunque especifique el puerto 5000, como en el provisionamiento se realizó la redirección del puerto debería de estar disponible también en el puerto 80. Lo comprobé accediendo a esa IP con ese puerto por medio del navegador:
+
+![Puesta en marcha del servicio](docs/figuras/hito3/servicio-azure.png)
+
+![Acceso a ruta raíz](docs/figuras/hito3/prueba-azure.png)
+
+![Acceso a ruta jugadores](docs/figuras/hito3/prueba2-azure.png)
+
+Con ello demostramos que el provisionamiento se ha realizado correctamente y que desde ese momento nuesta máquina virtual está lista para poder trabajar y realizar el servicio diseñado hasta la fecha en nuestro proyecto a través de la nube.
+
 
 ## Orquestación
 
