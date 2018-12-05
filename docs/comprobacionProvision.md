@@ -10,7 +10,7 @@ Tras este pequeño cambio ya estaba listo para desplegar en mi máquina virtual,
 
 Ya tan solo nos queda ejecutar su proyecto para comprobar si el funcionamiento es el correcto. Para ello hemos realizado lo siguiente:
 ~~~
-python3 principal.py o gunicorn -b :80 principal:app
+python3 principal.py o gunicorn -b :5000 principal:app
 ~~~
 ![provisionamientoAnsible](figuras/comprobacionProvision/despliegueComprobacionEjecucion.png)
 
