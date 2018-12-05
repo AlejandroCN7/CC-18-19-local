@@ -45,7 +45,7 @@ Se pretende realizar un despliegue en la nube utilizando para ello una arquitect
 presentándolo como un conjunto de pequeños servicios (microservicios) que funcionan
 de una forma totalmente independiente (aunque luego se comuniquen y colaboren entre ellos). En función de las necesidades que se han especificado en la descripción de la solución, inicialmente, planteo el desarrollo de los siguientes microservicios:
 
-- Gestión de usuarios (Sing up, log in, modificación del perfil de usuario...).
+- Gestión de usuarios (Sign up, log in, modificación del perfil de usuario...).
 
 - Gestión de la base de datos MongoDB.
 
@@ -79,7 +79,7 @@ En principio, para realizar un desarrollo basado en pruebas, haremos uso de [Uni
 
 Despliegue: https://pruebacc.herokuapp.com/
 
-El despliegue del servivio web se llevará a cabo utilizando [Heroku](https://devcenter.heroku.com/), siguiendo la filosofía de plataforma como un servicio (Paas) en la nube. Esto nos permite tener a nuestra disposición un servidor en el que poder desplegar nuestro proyecto en la nube de forma gratuita. El ser gratuito implica que tenemos limitaciones a la hora de hacerlo, pero no nos supone un problema para realizar los primeros pasos de este proyecto.
+El despliegue del servivio web se llevará a cabo utilizando [Heroku](https://devcenter.heroku.com/), siguiendo la filosofía de plataforma como un servicio (PaaS) en la nube. Esto nos permite tener a nuestra disposición un servidor en el que poder desplegar nuestro proyecto en la nube de forma gratuita. El ser gratuito implica que tenemos limitaciones a la hora de hacerlo, pero no nos supone un problema para realizar los primeros pasos de este proyecto.
 
 Todos los datos que se reciben desde el servidor están en formato [JSON](https://es.wikipedia.org/wiki/JSON). El enlace de despliegue que se acaba de mostrar nos permite hacer un GET (o cualquier otra orden, pero esta es la que hace un navegador web por defecto) a la raíz de nuestro servicio web con la finalidad de obtener el recurso. Los recursos que tenemos ahora mismo desplegados son:
 
