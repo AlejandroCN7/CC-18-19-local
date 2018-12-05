@@ -47,7 +47,7 @@ Se pretende realizar un despliegue en la nube utilizando para ello una arquitect
 presentándolo como un conjunto de pequeños servicios (microservicios) que funcionan
 de una forma totalmente independiente (aunque luego se comuniquen y colaboren entre ellos). En función de las necesidades que se han especificado en la descripción de la solución, inicialmente, planteo el desarrollo de los siguientes microservicios:
 
-- Gestión de usuarios (Sing up, log in, modificación del perfil de usuario...).
+- Gestión de usuarios (Sign up, log in, modificación del perfil de usuario...).
 
 - Gestión de la base de datos MongoDB.
 
