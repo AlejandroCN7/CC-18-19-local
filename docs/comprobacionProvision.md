@@ -12,9 +12,9 @@ Ya tan solo nos queda ejecutar su proyecto para comprobar si el funcionamiento e
 ~~~
 python3 principal.py o gunicorn -b :80 principal:app
 ~~~
-![provisionamientoAnsible](figuras/despliegueComprobacionEjecucion.png)
+![provisionamientoAnsible](figuras/comprobacionProvision/despliegueComprobacionEjecucion.png)
 
 Como podemos ver en la siguiente imagen obtenemos un status: Ok por lo que concluimos que el provisionamiento realizado es correcto. Además, para finalizar mostramos uno de los recursos de su aplicación a través de GET.
-![provisionamientoAnsible](figuras/despliegueComprobacionNavegador.png)
-![provisionamientoAnsible](figuras/despliegueJugadores.png)
+![provisionamientoAnsible](figuras/comprobacionProvision/despliegueComprobacionNavegador.png)
+![provisionamientoAnsible](figuras/comprobacionProvision/despliegueJugadores.png)
 
