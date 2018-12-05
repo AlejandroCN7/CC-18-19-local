@@ -222,17 +222,17 @@ Lo interesante de este hito es la posibilidad de desplegar nuestra máquina virt
 
 He elegido Azure para realizar el despliegue de la máquina debido a que JJ nos proporcionó dolares para poder utilizar esta herramienta y quería aprovecharlo.
 
-Lo primero que hay que hacer una vez nos registramos en Azure es crear nuestra máquina virtual "virgen", es decir, sin nada instalado. Para ello he utilizado la propia interfaz de la página. En un principio, había instalado en ella el sistama operativo [Debian9]() para servidores. Sinceramente, no lo hice por ningún motivo especial, simplemente porque aun estaba realizando pruebas y fue el primero que se me vino a la cabeza.
+Lo primero que hay que hacer una vez nos registramos en Azure es crear nuestra máquina virtual "virgen", es decir, sin nada instalado. Para ello he utilizado la propia interfaz de la página. En un principio, había instalado en ella el sistama operativo Debian 9 para servidores. Sinceramente, no lo hice por ningún motivo especial, simplemente porque aun estaba realizando pruebas y fue el primero que se me vino a la cabeza.
 
-Entonces, como se puede ver en el [antiguo estado de playbook.yml para azure]() me dió muchos problemas para poder redirigir el puerto 5000 al 80. Y aún así, seguía teniendo problemas con eso. Por ello, decidí cambiarme a [Ubuntu Server 16.04 LTS]().
+Entonces, como se puede ver en el [antiguo estado de playbook.yml para azure](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/commit/1ed355fad1aceef9a691fc4093b10480474b798c) me dió muchos problemas para poder redirigir el puerto 5000 al 80. Y aún así, seguía teniendo problemas con eso. Por ello, decidí cambiarme a [Ubuntu Server 16.04 LTS]().
 
 Esta vez si me pensé mejor cual era el SO que quería correr en mi máquina virtual. Las principales cuestiones por las que elegí Ubuntu Server es porque estoy familiarizado a su funcionamiento gracias a la asignatura de Ingeniería de Servidores en el Grado en Ingeniería Informática de la Universidad de Granada. Además, es estos sistemas ya tenemos instalado python2 y python3 preinstalado, por lo que nos ahorra parte del trabajo.
 
-El archivo [ansible.cfg]() es igual al explicado anteriormente con Vagrant. El archivo [ansible_hosts]() solo ha sido modificado con el nombre de la máquina de Azure (solo por comodidad, para Ansible no tiene por qué tener el mismo nombre) y con el usuario e IP pública de la misma.
+El archivo [ansible.cfg](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/provision/azure/ansible.cfg) es igual al explicado anteriormente con Vagrant. El archivo [ansible_hosts](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/provision/azure/ansible_hosts) solo ha sido modificado con el nombre de la máquina de Azure (solo por comodidad, para Ansible no tiene por qué tener el mismo nombre) y con el usuario e IP pública de la misma.
 
-Finalmente se ha creado el [playbook.yml]() el cual es muy parecido al explicado con Vagrant pero difiere en algunas cosas. Digamos que instala las dependecias y clona este repositorio de la misma forma que lo hace Vagrant, pero aquí hemos tenido en cuenta la redirección de puertos. De esta forma, se tiene acceso también por el puerto 80 que era uno de los requisitos de este hito.
+Finalmente se ha creado el [playbook.yml](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/provision/azure/playbook.yml) el cual es muy parecido al explicado con Vagrant pero difiere en algunas cosas. Digamos que instala las dependecias y clona este repositorio de la misma forma que lo hace Vagrant, pero aquí hemos tenido en cuenta la redirección de puertos. De esta forma, se tiene acceso también por el puerto 80 que era uno de los requisitos de este hito.
 
-El siguiente paso ha sido entrar en la carpeta del repositorio [azure]() dentro de [provision]() y ejecutar el playbook para que ansible provisione automáticamente nuestra máquina de Azure.
+El siguiente paso ha sido entrar en la carpeta del repositorio [azure](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/tree/master/provision/azure) dentro de [provision](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/tree/master/provision) y ejecutar el playbook para que ansible provisione automáticamente nuestra máquina de Azure.
 
 ![Provisionamiento de Azure con Ansible](docs/figuras/hito3/provisionamiento-azure.png)
 
@@ -253,6 +253,12 @@ Aunque especifique el puerto 5000, como en el provisionamiento se realizó la re
 ![Acceso a ruta jugadores](docs/figuras/hito3/prueba2-azure.png)
 
 Con ello demostramos que el provisionamiento se ha realizado correctamente y que desde ese momento nuesta máquina virtual está lista para poder trabajar y realizar el servicio diseñado hasta la fecha en nuestro proyecto a través de la nube.
+
+### Comprobaciones con otros alumnos
+
+He probado a provisionar una máquina a través del repositorio de @lgaq94. Se puede ver el [pull request](https://github.com/luiisgallego/MII_CC_1819/commit/a26f2501515daf80dba1587316f0a05f8dd9afed) y el [archivo](https://github.com/luiisgallego/MII_CC_1819/blob/master/provision/Prueba_Provision/Prueba_provisionamiento.md).
+
+@lgaq94 a provisionado una máquina a través de mi repositorio haciendo un [pull request](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/commit/c7021616b5e480bf5691ab11be3c09d98058a183) de este [archivo](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/docs/comprobacionProvision.md).
 
 
 ## Orquestación
