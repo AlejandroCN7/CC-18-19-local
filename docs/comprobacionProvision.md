@@ -6,15 +6,15 @@ Para comprobar que el provisionamiento del proyecto de Alejandro funciona correc
 
 Tras este pequeño cambio ya estaba listo para desplegar en mi máquina virtual, para ello he hecho uso de la instrucción de *Ansible* que he utilizado continuamente en mi proyecto, obteniendo un resultado favorable como podemos ver en la siguiente captura:
 
-![provisionamientoAnsible](figura/comprobacionProvision/comprobacionAnsible.png)
+![provisionamientoAnsible](figuras/comprobacionProvision/comprobacionAnsible.png)
 
 Ya tan solo nos queda ejecutar su proyecto para comprobar si el funcionamiento es el correcto. Para ello hemos realizado lo siguiente:
 ~~~
 python3 principal.py o gunicorn -b :80 principal:app
 ~~~
-![provisionamientoAnsible](figura/despliegueComprobacionEjecucion.png)
+![provisionamientoAnsible](figuras/despliegueComprobacionEjecucion.png)
 
 Como podemos ver en la siguiente imagen obtenemos un status: Ok por lo que concluimos que el provisionamiento realizado es correcto. Además, para finalizar mostramos uno de los recursos de su aplicación a través de GET.
-![provisionamientoAnsible](figura/despliegueComprobacionNavegador.png)
-![provisionamientoAnsible](figura/despliegueJugadores.png)
+![provisionamientoAnsible](figuras/despliegueComprobacionNavegador.png)
+![provisionamientoAnsible](figuras/despliegueJugadores.png)
 
