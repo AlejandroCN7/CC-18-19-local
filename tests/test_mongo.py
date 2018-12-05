@@ -58,12 +58,6 @@ class TestModel(unittest.TestCase):
 
         ## En el ultimo test dejo la base de datos en su estado inicial
         self.mongo.removeJugadores()
-        j1 = Jugador("Hapneck", "Alejandro", "Campoy Nieves", 22, ["Fortnite", "Hollow Knight", "The Witcher"], True)
-        j2 = Jugador("Malcaide", "Alfonso", "Barragan Lara", 22, ["Counter Strike"], True)
-        j3 = Jugador("Rekkles", "Juan", "Martinez Casado", 22, ["Fortnite", "League of Legends", "Counter Strike"],False)
-        self.mongo.insertJugador(j1)
-        self.mongo.insertJugador(j2)
-        self.mongo.insertJugador(j3)
-
+        
 if __name__ == '__main__':
     unittest.main()
