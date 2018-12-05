@@ -17,4 +17,3 @@ python3 principal.py o gunicorn -b :80 principal:app
 Como podemos ver en la siguiente imagen obtenemos un status: Ok por lo que concluimos que el provisionamiento realizado es correcto. Además, para finalizar mostramos uno de los recursos de su aplicación a través de GET.
 ![provisionamientoAnsible](figuras/comprobacionProvision/despliegueComprobacionNavegador.png)
 ![provisionamientoAnsible](figuras/comprobacionProvision/despliegueJugadores.png)
-
