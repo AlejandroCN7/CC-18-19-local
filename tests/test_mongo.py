@@ -58,6 +58,6 @@ class TestModel(unittest.TestCase):
 
         ## En el ultimo test dejo la base de datos en su estado inicial
         self.mongo.removeJugadores()
-        
+
 if __name__ == '__main__':
     unittest.main()
