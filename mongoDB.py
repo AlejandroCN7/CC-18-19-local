@@ -2,7 +2,7 @@ import pymongo
 import logging
 
 class BaseDatos:
-    def __init__(self,direccion):
+    def __init__(self,direccion,prueba=False):
         logging.info("MONGO:Tratando de conectar con la base de datos.")
         MONGODB_URI = direccion
         client = pymongo.MongoClient(MONGODB_URI, connectTimeoutMS=40000)
