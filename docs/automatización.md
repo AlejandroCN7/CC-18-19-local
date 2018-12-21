@@ -3,7 +3,7 @@
 ---
 MV2: 40.89.156.39
 
-En este apartado hablaremos sobre cómo automatizar el proceso de creación de máquinas virtuales desde la línea de órdenes. Esto se realizará también desde Azure. Esta vez, se utilizará Azure CLI para poder desarrollar el script necesario. El motivo principal por el que sigo utilizandolo es porque tengo las suscripciones de los hitos anteriores y porque Amazon aún no me ha respondido por correo a la petición que realice.
+En este apartado hablaremos sobre cómo automatizar el proceso de creación de máquinas virtuales desde la línea de órdenes. Esto se realizará también desde Azure. Esta vez, se utilizará [Azure CLI](https://docs.microsoft.com/es-es/cli/azure/install-azure-cli-apt?view=azure-cli-latest) para poder desarrollar el script necesario. El motivo principal por el que sigo utilizándolo es porque tengo las suscripciones de los hitos anteriores y porque Amazon aún no me ha respondido por correo a la petición que realice.
 
 También realizaremos el provisionamiento automático de la máquina reutilizando el trabajo realizado con Ansible en el hito anterior. Esta es una parte opcional, pero la considero conveniente ya que realizamos todo el proceso de creación y de preparación de la máquina o máquinas virtuales ejecutando un único script.
 
@@ -64,7 +64,7 @@ En este punto, debemos de especificar la configuración de nuestra máquina. Inc
 
 - **Nombre**: El nombre de la máquina virtual para poder identificarle desde Azure.
 
-- **Nombre del administrador**: Azure no permite mayusculas en este nick. Puse "alejandro" y es el usuario con el que accedo a la máquina en el futuro por medio de SSH.
+- **Nombre del administrador**: Azure no permite mayúsculas en este nick. Puse "alejandro" y es el usuario con el que accedo a la máquina en el futuro por medio de SSH.
 
 - **Generar las claves pública y privada SSH**: Esencial si quiero conectarme a la máquina directamente cuando este creada sin necesidad de contraseñas.
 
@@ -102,11 +102,11 @@ Para averiguar como podía hacerlo desde los comandos de Azure consulte su [docu
 
 ### Provisionamiento con Ansible
 
-El objetivo del hito ya está conseguido; automatizar la creación y configuración de una o varias máquinas virtuales. No obstante, quise dar un paso más allá y realizar el provisionamiento de la máquina al igual que hice en el hito anterior. En un principio, pensé que con reutilizar el trabajo del pasado tendría el trabajo hecho. Para mi mala fortuna, tuve una serie de inconvenientes que, aunque son problemas tontos, hicieron que perdiera muchi tiempo en solucionarlos.
+El objetivo del hito ya está conseguido; automatizar la creación y configuración de una o varias máquinas virtuales. No obstante, quise dar un paso más allá y realizar el provisionamiento de la máquina al igual que hice en el hito anterior. En un principio, pensé que con reutilizar el trabajo del pasado tendría el trabajo hecho. Para mi mala fortuna, tuve una serie de inconvenientes que, aunque son problemas tontos, hicieron que perdiera mucho tiempo en solucionarlos.
 
 Para empezar, no podemos preconfigurar Ansible con la IP pública de la máquina, ya que no sabemos cual va a ser hasta que esté creada. Entonces, tenía que buscar la forma de averiguar la IP pública de la máquina que se acaba de crear dentro del script, para luego dársela a Ansible.
 
-Tras un tiempo buscando en la documentación de Azure, encontre [esto](https://docs.microsoft.com/es-es/azure/virtual-network/virtual-network-deploy-static-pip-arm-cli) y me di cuenta de que podía cambiar la opción de output por el formato JSON. Tras investigar los campos de clave valor que tiene el comando `az network public-ip show   --resource-group myResourceGroup   --name myPublicIpAddress  --output json`, vi la clave "ipAddress" que tenía justamente la información que necesitaba.
+Tras un tiempo buscando en la documentación de Azure, encontré [esto](https://docs.microsoft.com/es-es/azure/virtual-network/virtual-network-deploy-static-pip-arm-cli) y me di cuenta de que podía cambiar la opción de output por el formato JSON. Tras investigar los campos de clave valor que tiene el comando `az network public-ip show   --resource-group myResourceGroup   --name myPublicIpAddress  --output json`, vi la clave "ipAddress" que tenía justamente la información que necesitaba.
 
 Ahora, necesitaba la forma de aislar ese valor del resto de la salida del comando. Entonces busqué formas para manipular texto JSON desde el bash. Encontré [jq](https://www.systutorials.com/docs/linux/man/1-jq/), un comando con el que podía sacar el valor de esa clave. Entonces, mi comando quedó finalmente de esta forma:
 
@@ -117,9 +117,11 @@ Sin embargo, otro de los problemas con los que me topé son las doble comillas. 
     IP=`echo ${IP/\"/}`
     IP=`echo ${IP/\"/}`
 
-Finalmente, podemos realizar el provisionamiento de Ansible. Para no tener la necesidad se poner el script en el mismo lugar que tenia el provisionamiento (donde se encuentra Ansible.cfg), establecí la configuración por medio del mismo comando indicando el inventorio (la IP pública de la máquina y el usuario) y que no hiciera comprobación de las claves del host tal y como se aprecia en el comando:
+Finalmente, podemos realizar el provisionamiento de Ansible. Para no tener la necesidad se poner el script en el mismo lugar que tenia el provisionamiento (donde se encuentra Ansible.cfg), establecí la configuración por medio del propio comando indicando el inventario (la IP pública de la máquina y el usuario) y que no hiciera comprobación de las claves del host tal y como se aprecia:
 
-Es importante dar permisos de ejecución al script con chmod, de lo contrario no funcionará correctamente. Al no tener el archivo ansible.cfg no me di cuenta hasta que le aplique el verbose al provisionamiento, pero tenía el problema que JJ mencionó una vez en clase
+`ansible-playbook -i "$IP," -e 'host_key_checking=False' -b provision/azure/playbook.yml --user alejandro -v`
+
+Es importante dar permisos de ejecución al script con chmod, de lo contrario no funcionará correctamente. Al no tener el archivo ansible.cfg no me di cuenta hasta que le aplique el verbose al provisionamiento, pero tenía el problema que JJ mencionó una vez en clase.
 
 ![man in the middle](figuras/hito4/error.png)
 
