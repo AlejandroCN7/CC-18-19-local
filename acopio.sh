@@ -36,4 +36,4 @@ IP=`echo ${IP/\"/}`
 IP=`echo ${IP/\"/}`
 
 #https://stackoverflow.com/questions/44592141/ansible-ad-hoc-command-with-direct-host-specified-no-hosts-matched --> Este es el motivo por el que tuve que ponerle la coma al final de la IP.
-ansible-playbook -i "$IP," -e 'host_key_checking=False' -b playbook.yml --user alejandro -v
+ansible-playbook -i "$IP," -e 'host_key_checking=False' -b provision/azure/playbook.yml --user alejandro -v
