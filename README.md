@@ -101,7 +101,7 @@ En este apartado hablaremos sobre cómo automatizar el proceso de creación de m
 
 También realizaremos el provisionamiento automático de la máquina reutilizando el trabajo realizado con Ansible en el hito anterior. Esta es una parte opcional, pero la considero conveniente ya que realizamos todo el proceso de creación y de preparación de la máquina o máquinas virtuales ejecutando un único script.
 
-Para más información [aquí]().
+Para más información [aquí](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/docs/automatizaci%C3%B3n.md).
 
 ## Orquestación
 
