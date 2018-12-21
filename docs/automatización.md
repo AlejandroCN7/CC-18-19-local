@@ -62,7 +62,7 @@ En este punto, debemos de especificar la configuración de nuestra máquina. Inc
 
 - **Grupo de recursos**: El creado en el paso anterior.
 
-- **Nombre**: El nombre de la máquina virtual para poder identificarle desde Azure.
+- **Nombre**: El nombre de la máquina virtual para poder identificarla desde Azure.
 
 - **Nombre del administrador**: Azure no permite mayúsculas en este nick. Puse "alejandro" y es el usuario con el que accedo a la máquina en el futuro por medio de SSH.
 
