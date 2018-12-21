@@ -25,7 +25,7 @@ Una cosa que me gustaría mejorar en el futuro es el nombre de los logs por otro
 
 También se ha quitado la redirección de puertos y ya se puede usar el puerto 80 directamente.
 
-### Automatización con Azure CLI y ansible
+### Automatización con Azure CLI y Ansible
 
 Tal y como se especifica en este hito, se ha realizado en el script llamado [acopio.sh](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/acopio.sh). Ahora pasaré a explicar el proceso que lleva a cabo y hablaré en mayor detalle de cada una de las decisiones tomadas que tuve que realizar y me parecieron relevantes tales como región del grupo de recursos, imagen de sistema operativo, etc.
 
