@@ -103,14 +103,6 @@ También realizaremos el provisionamiento automático de la máquina reutilizand
 
 Para más información [aquí](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/docs/automatizaci%C3%B3n.md).
 
-## Orquestación
-
-Hitos futuros.
-
-## Contenedores
-
-Hitos futuros.
-
 ## Licencia
 
 ---

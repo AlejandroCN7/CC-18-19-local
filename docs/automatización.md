@@ -68,11 +68,11 @@ En este punto, debemos de especificar la configuración de nuestra máquina. Inc
 
 - **Generar las claves pública y privada SSH**: Esencial si quiero conectarme a la máquina directamente cuando este creada sin necesidad de contraseñas.
 
-- **IP pública**: Como en pasos posteriores quiero provisionar de forma automática la máquina que estoy creando con Ansible. Este opción me será de utilidad.
+- **IP pública**: Ya que en pasos posteriores quiero provisionar de forma automática la máquina que estoy creando con Ansible. Este opción me será de utilidad.
 
 - **Establer IP pública estática**: Es esencial, ya que si cada vez que enciendo y apago la máquina creada cambia esta IP, la IP que especifico en esta documentación no será válida la próxima vez que la encienda.
 
-- **Tamaño**: Revisando las opciones que ponía a disposición Azure CLI, me percaté de este parámetro. Encontré información en este [enlace](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/). Básicamente, podemos especificar perfiles estándar del hardware (virtual) de nuestra máquina. De tal forma que ajustamos el coste de mantener la máquina a nuestras necesidades. Obviamente, no cuesta el mismo dinero mantener una máquina más potente que otra en el mismo intervalo de tiempo. Entonces, me fui a los perfiles de bajo coste directamente, ya que de momento mi proyecto no necesita mucha fuerza de procesamiento ni memoria y, de todas formas, esto es algo que puedo cambiar en el futuro si el volumen de mi proyecto cambia. Finalmente, me decante por la instancia llamada "B1S" la cual tiene una única CPU, 1GB de RAM y solo me cuesta 0,013$ la hora.
+- **Tamaño**: Revisando las opciones que ponía a disposición Azure CLI, me percaté de este parámetro. Encontré información en este [enlace](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/). Básicamente, podemos especificar perfiles estándar del hardware (virtual) de nuestra máquina. De tal forma que ajustamos el coste de mantener la máquina a nuestras necesidades. Obviamente, no cuesta el mismo dinero mantener una máquina más potente que otra en el mismo intervalo de tiempo. Entonces, me fui a los perfiles de bajo coste directamente, ya que de momento mi proyecto no necesita mucha fuerza de procesamiento ni memoria y, de todas formas, esto es algo que puedo cambiar en el futuro si el volumen de mi proyecto cambia. Finalmente, me decanté por la instancia llamada "B1S" la cual tiene una única CPU, 1GB de RAM y solo me cuesta 0,013$ la hora.
 
 ![perfiles estándar del hardware](figuras/hito4/size.png)
 
@@ -80,7 +80,7 @@ En este punto, debemos de especificar la configuración de nuestra máquina. Inc
 
 ### Imagen seleccionada
 
- Llegados a este punto, comencé a deliberar cuál sería la imagen más apropiada para poner a funcionar mi proyecto. Por un lado, debemos de tener en cuenta las librerías y herramientas que utiliza nuestro proyecto. Por ello, debería de interesarnos una imagen que tuviese Python instalado por defecto y que soportase todas las librerías y módulos que este intérprete utiliza en nuestro proyecto.  Las imágenes de Windows no las contemplo directamente por no pertenecer a una licencia de Software Libre.
+ Llegados a este punto, comencé a deliberar cuál sería la imagen más apropiada para poner a funcionar mi proyecto. Por un lado, debemos tener en cuenta las librerías y herramientas que utiliza nuestro proyecto. Por ello, debería interesarnos una imagen que tuviese Python instalado por defecto y que soportase todas las librerías y módulos que este intérprete utiliza en nuestro proyecto.  Las imágenes de Windows no las contemplo directamente por no pertenecer a una licencia de Software Libre.
 
  Por otro lado, comencé a buscar información por Internet. Por ejemplo, según este [artículo](https://thishosting.rocks/debian-vs-ubuntu/). Los sistemas Debian Server son más apropiados para entornos empresariales ya que son más estables y seguros. No obstante, si lo que se busca es tener las últimas versiones de todo tipo de software y le damos un uso más personal (o académico), sería más apropiado una imagen de Ubuntu Server.
 
@@ -112,12 +112,12 @@ Ahora, necesitaba la forma de aislar ese valor del resto de la salida del comand
 
     IP=`az network public-ip show   --resource-group myResourceGroup   --name myPublicIpAddress  --output json | jq ".ipAddress"`
 
-Sin embargo, otro de los problemas con los que me topé son las doble comillas. En mi variable tenía la IP pública de la variable envuelta en dobles comillas, para quitarla utilice este comando dos veces seguidas (sustituyo las dobles comillas por cadena vacía y listo):
+Sin embargo, otro de los problemas con los que me topé son las dobles comillas. En mi variable tenía la IP pública de la variable envuelta en dobles comillas, para quitarla utilice este comando dos veces seguidas (sustituyo las dobles comillas por cadena vacía y listo):
 
     IP=`echo ${IP/\"/}`
     IP=`echo ${IP/\"/}`
 
-Finalmente, podemos realizar el provisionamiento de Ansible. Para no tener la necesidad se poner el script en el mismo lugar que tenia el provisionamiento (donde se encuentra Ansible.cfg), establecí la configuración por medio del propio comando indicando el inventario (la IP pública de la máquina y el usuario) y que no hiciera comprobación de las claves del host tal y como se aprecia:
+Finalmente, podemos realizar el provisionamiento de Ansible. Para no tener la necesidad de poner el script en el mismo lugar que tenia el provisionamiento (donde se encuentra Ansible.cfg), establecí la configuración por medio del propio comando indicando el inventario (la IP pública de la máquina y el usuario) y que no hiciera comprobación de las claves del host tal y como se aprecia:
 
 `ansible-playbook -i "$IP," -e 'host_key_checking=False' -b provision/azure/playbook.yml --user alejandro -v`
 
@@ -125,7 +125,9 @@ Es importante dar permisos de ejecución al script con chmod, de lo contrario no
 
 ![man in the middle](figuras/hito4/error.png)
 
-No me dejaba conectarme a la máquina por SSH debido a que tenía sospechas de ataque man in the middle. Si nos pasa esto, la forma de solucionarlo es borrar ~/.ssh/known_hosts. Al menos, a mí me funcionó. Es algo que te hace emplear mucho tiempo en averiguar el problema, pero que al mismo tiempo te ayuda a aprender.
+No me dejaba conectarme a la máquina por SSH debido a que tenía sospechas de ataque man in the middle (la opción -e la incluí mas tarde, quizás fue esa la causa). Si nos pasa esto, la forma de solucionarlo es borrar ~/.ssh/known_hosts. Al menos, a mí me funcionó. Es algo que te hace emplear mucho tiempo en averiguar el problema, pero que al mismo tiempo te ayuda a aprender.
+
+Otro problema que tuve es que la variable IP del script no era incluida de forma correcta en el comando, se quejaba de errores tipo ASCII o algo por el estilo. La solución es poner una coma al final de la variable como se puede apreciar en el comando descrito anteriormente. Conseguí saber esto gracias a este [enlace](https://stackoverflow.com/questions/44592141/ansible-ad-hoc-command-with-direct-host-specified-no-hosts-matched).
 
 Podemos ver el acceso a la máquina y que el servicio funciona en los siguientes pantallazos:
 
