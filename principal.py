@@ -6,7 +6,7 @@ import logging
 
 import os
 
-app = Flask("hito4")
+app = Flask("hito5")
 api = Api(app)
 
 #Para el sistema de logs
@@ -18,16 +18,11 @@ logging.basicConfig(filename='app.log', filemode='a',format='%(asctime)s - %(nam
 #def hello():
     #return "Hola Mundo !! :)
 
-j1 = Jugador("Hapneck","Alejandro","Campoy Nieves",22,["Fortnite","Hollow Knight","The Witcher"],True)
-j2 = Jugador("Malcaide","Alfonso","Barragan Lara",22,["Counter Strike"],True)
-j3 = Jugador("Rekkles","Juan","Martinez Casado",22,["Fortnite","League of Legends","Counter Strike"],False)
-
-mongo = BaseDatos("mongodb://Alejandro:alejandro13@ds026018.mlab.com:26018/jugadores")
-
-mongo.insertJugador(j1)
-mongo.insertJugador(j2)
-mongo.insertJugador(j3)
-
+# Si se trata de una prueba de travis debe de hacerlo en local
+if('TRAVIS' in os.environ):
+    mongo = BaseDatos("mongodb://127.0.0.1:27017/MiBaseDatos", True)
+else:
+    mongo = BaseDatos("mongodb://10.0.0.5:27017/MiBaseDatos",False)
 
 #recursos = {"jugador1":j1.__dict__(),
 #            "jugador2":j2.__dict__(),

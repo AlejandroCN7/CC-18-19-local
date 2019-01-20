@@ -1,13 +1,16 @@
-import pymongo
 import logging
+import pymongo
+from model import Jugador
+
+import os
 
 class BaseDatos:
     def __init__(self,direccion,prueba=False):
         logging.info("MONGO:Tratando de conectar con la base de datos.")
         MONGODB_URI = direccion
         client = pymongo.MongoClient(MONGODB_URI, connectTimeoutMS=40000)
-        db = client.get_database()
-        if (prueba):
+        db = client["MiBaseDatos"]
+        if (not prueba):
             self.jugadores = db.jugadores
         else:
             self.jugadores = db.prueba
@@ -63,5 +66,8 @@ class BaseDatos:
 
     def getSize(self):
         return self.jugadores.count_documents({})
+
+
+
 
 
