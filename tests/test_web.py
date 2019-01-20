@@ -3,6 +3,7 @@ sys.path.append("../")
 
 import unittest
 from model import Jugador
+from mongoDB import BaseDatos
 from principal import *
 import json
 
@@ -16,6 +17,16 @@ class TestModel(unittest.TestCase):
 
     def setUp(self):
         self.app = app.test_client()
+
+        #Inicializamos la base de datos de prueba con unos jugadores de ejemplo
+        mongo = BaseDatos("mongodb://127.0.0.1:27017/MiBaseDatos", True)
+        j1 = Jugador("Hapneck", "Alejandro", "Campoy Nieves", 22, ["Fortnite", "Hollow Knight", "The Witcher"], True)
+        j2 = Jugador("Malcaide", "Alfonso", "Barragan Lara", 22, ["Counter Strike"], True)
+        j3 = Jugador("Rekkles", "Juan", "Martinez Casado", 22, ["Fortnite", "League of Legends", "Counter Strike"],False)
+
+        mongo.insertJugador(j1)
+        mongo.insertJugador(j2)
+        mongo.insertJugador(j3)
 
     # respuesta.headers para consultar el tipo MIME del contenido
     # respuesta.status_code para saber el código de la cabecera de respuesta.
