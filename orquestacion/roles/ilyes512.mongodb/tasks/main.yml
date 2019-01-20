@@ -1,0 +1,61 @@
+---
+- name: Set MongoDB version
+  set_fact:
+    __mongodb_version: "{{ (mongodb_version == 'latest') | ternary('*', mongodb_version) }}"
+
+- name: Import MongoDB public key
+  become: yes
+  apt_key:
+    keyserver: "hkp://keyserver.ubuntu.com:80"
+    state: present
+    id: EA312927
+
+- name: Add MongoDB repository
+  become: yes
+  apt_repository:
+    filename: "mongodb-org-3.2"
+    repo: "deb http://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release }}/mongodb-org/3.2 multiverse"
+    state: present
+
+- name: Install MongoDB
+  become: yes
+  apt:
+    pkg: "{{ item }}={{ __mongodb_version }}"
+    state: "{{ mongodb_package_state }}"
+    update_cache: yes
+    cache_valid_time: 3600
+    force: "{{ mongodb_allow_downgrade }}"
+  with_items:
+    - mongodb-org
+    - mongodb-org-server
+    - mongodb-org-shell
+    - mongodb-org-mongos
+    - mongodb-org-tools
+  notify:
+    - restart mongodb
+
+- name: Create systemd service file
+  become: yes
+  copy:
+    src: "mongod.service"
+    dest:  "/lib/systemd/system/mongod.service"
+
+- name: Allow remote connections (modificado por @AlejandroCN7)
+  become: yes
+  lineinfile:
+    dest: /etc/mongod.conf
+    regexp: "^\\s*bindIp.*"
+    line: "  bindIp: 127.0.0.1,10.0.0.5"
+    state: present
+  when: mongodb_allow_remote is defined and mongodb_allow_remote|bool
+  notify: restart mongodb
+
+- name: Disallow remote connections
+  become: yes
+  lineinfile:
+    dest: /etc/mongod.conf
+    regexp: "^\\s*bindIp.*"
+    line: "  bindIp: 127.0.0.1"
+    state: present
+  when: mongodb_allow_remote is defined and not mongodb_allow_remote|bool
+  notify: restart mongodb

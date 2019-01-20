@@ -1,0 +1,4 @@
+- hosts: all
+  become: yes
+  roles:
+    - { role: ilyes512.mongodb, tag: ansidev.mongodb }

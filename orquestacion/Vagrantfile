@@ -1,0 +1,85 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Plugin para poder utilizar Azure desde vagrant
+require 'vagrant-azure'
+#-------------------------------------------------------------------------------
+Vagrant.configure("2") do |config|
+
+  config.vm.box = 'azure'
+  # Indicamos ruta clave privada para poder entrar posteriormente con SSH
+  config.ssh.private_key_path = '~/.ssh/id_rsa'
+
+  #Ahora vamos a definir las dos máquinas necesarias:
+
+  #-------------------------------------------------------------------------------
+  # Una para el servicio REST con flask
+  #-------------------------------------------------------------------------------
+  config.vm.define "rest" do |rest|
+    rest.vm.host_name="rest"
+
+    # Vamos a montar las maquinas usando el provisionador de azure:
+    # https://github.com/Azure/vagrant-azure
+    # https://blog.scottlowe.org/2017/12/11/using-vagrant-with-azure/
+
+      rest.vm.provider "azure" do |az,override|
+        # Pull Azure AD service principal information from environment variables
+        az.tenant_id = ENV['AZURE_TENANT_ID']
+        az.client_id = ENV['AZURE_CLIENT_ID']
+        az.client_secret = ENV['AZURE_CLIENT_SECRET']
+        az.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
+
+        # Specify VM parameters
+        az.vm_name = 'ubuntu16'                                      # Nombre VM
+        az.vm_size = 'Standard_B1s'                                  # Hardware
+        az.vm_image_urn = 'Canonical:UbuntuServer:16.04-LTS:latest'  # Imagen que va a usar
+        az.resource_group_name = 'MyResourceGroup'                   # Grupo de recursos
+        az.location = 'francecentral'                                # Región del grupo de recursos
+        az.admin_username = 'alejandro'                              # Usuario administrador
+        az.virtual_network_name = 'redPrivada'                       # Definimos red privada virtual
+        az.tcp_endpoints = [80,27017]                                # Abrimos puerto 80 para que escuche
+      end # Rest.vm.provider 'azure'
+
+      #Es importante añadir la provisión de ansible que tenemos preparada
+      #https://www.vagrantup.com/docs/provisioning/ansible_local.html
+      rest.vm.provision "ansible" do |ansible|
+        ansible.playbook = "playbook.yml"
+      end # Rest.vm.provision "ansible"
+    end #config.vm.define "Rest"
+  #-------------------------------------------------------------------------------
+
+  #-------------------------------------------------------------------------------
+  # Otra para la base de datos
+  #-------------------------------------------------------------------------------
+  config.vm.define "mongo" do |mongo|
+    mongo.vm.host_name = "mongo"
+
+    mongo.vm.provider "azure" do |az,override|
+      # Pull Azure AD service principal information from environment variables
+      az.tenant_id = ENV['AZURE_TENANT_ID']
+      az.client_id = ENV['AZURE_CLIENT_ID']
+      az.client_secret = ENV['AZURE_CLIENT_SECRET']
+      az.subscription_id = ENV['AZURE_SUBSCRIPTION_ID']
+
+      # Specify VM parameters
+      az.vm_name = 'mongodb'                                       # Nombre VM
+      az.vm_size = 'Standard_B1s'                                  # Hardware
+      az.vm_image_urn = 'Canonical:UbuntuServer:16.04-LTS:latest'  # Imagen que va a usar
+      az.resource_group_name = 'MyResourceGroup'                   # Grupo de recursos
+      az.location = 'francecentral'                                # Región del grupo de recursos
+      az.admin_username = 'alejandro'                              # Usuario administrador
+      az.virtual_network_name = 'redPrivada'                       # Definimos la misma red privada virtual
+      az.tcp_endpoints = [80,27017]                                # Abrimos puerto para que escuche Mongo
+    end # Mongo.vm.provider 'azure'
+
+    #Es importante añadir la provisión de ansible que tenemos preparada
+    #https://www.vagrantup.com/docs/provisioning/ansible_local.html
+    mongo.vm.provision "ansible" do |ansible|
+      ansible.playbook = "mongo.yml"
+    end # Rest.vm.provision "ansible"
+  end #config.vm.define "Rest"
+
+  #-------------------------------------------------------------------------------
+
+
+end

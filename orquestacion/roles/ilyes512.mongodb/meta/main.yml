@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Ilyes Ahidar
+  description: This role installs and configures MongoDB for Ubuntu Trusty (14.04) and Xenial (16.04).
+  license: MIT
+  min_ansible_version: 2.0
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - xenial
+  galaxy_tags:
+    - ansidev
+    - development
+    - system
+    - web
+dependencies: []

@@ -1,0 +1,34 @@
+---
+  - hosts: all
+    become: true
+    pre_tasks:
+      - name: Instala git
+        apt:
+          pkg: git
+          state: present
+
+      - name: Instalando herramientas necesarias
+        sudo: yes
+        apt:
+          pkg: [wget,curl,python-minimal,python-setuptools,python-pip,python3-pip]
+          state: present
+
+    tasks:
+      - name: Clonando repositorio github
+        become: false
+        git:
+          repo: 'https://github.com/AlejandroCN7/Proyecto-Cloud-Computing.git'
+          clone: yes
+          dest: ~/proyecto
+
+      - name: Instalando dependencias del proyecto
+        become: false
+        pip:
+          requirements: ~/proyecto/requirements.txt
+          executable: pip3
+
+      - name: Pasando contraseña oculta de la base de datos
+        become: false
+        lineinfile:
+            path: ~/.bashrc
+            line: export MONGOPASS={{ lookup('env','MONGOPASS') }}

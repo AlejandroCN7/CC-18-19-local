@@ -1,0 +1,7 @@
+---
+ansidev_package_state: present
+
+mongodb_package_state: "{{ ansidev_package_state }}"
+mongodb_version: "latest" # latest | version without v-prefix
+mongodb_allow_downgrade: no # yes | no
+mongodb_allow_remote: yes
