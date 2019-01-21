@@ -1,7 +1,7 @@
 ## Orquestación
 
 ---
-Despliegue Vagrant: mv.servicioclo.ud
+Despliegue Vagrant: 20.188.33.240
 
 En este hito vamos a hablar sobre la orquestación de dos máquinas virtuales para poner en funcionamiento nuestro conjunto de microservicios. Para ello, haremos uso una vez más de [Azure](https://azure.microsoft.com/es-es/), pero esta vez, utilizando [Vagrant](https://www.vagrantup.com/) para este proceso de orquestación anteriormente mencionado. Hasta este momento, solo hacía uso de una máquina virtual, por lo que he tenido que ampliar el proyecto para tener la posibilidad de utilizar, al menos, dos máquinas virtuales y que este trabajo tenga sentido a nivel de infraestructura, hablaremos de esto en mayor detalle posteriormente. También se ha realizado pruebas de orquestación a otra alumna y ella ha realizado una prueba de orquestación con mi proyecto.
 
@@ -11,7 +11,7 @@ En este hito vamos a hablar sobre la orquestación de dos máquinas virtuales pa
 
 Como ya he mencionado anteriormente, era imprescindible que para este hito tuviese, al menos, dos máquinas virtuales con las que poder trabajar en mi servicio. Por ello, abandoné [mlab](https://mlab.com/) y he configurado mi propia máquina virtual en la que doy un servicio con [MongoDB](https://www.mongodb.com/es). Decidí esta base de datos (desde que usaba mlab) porque no había trabajado antes con bases de datos no relacionales, y quería salir un poco de mi zona de confort.
 
-El sistema operativo que decidí para esto fue Ubuntu Server 16.04 LTS. El principal motivo, es que encontré un rol de Ansible que funcionaba perfectamente para la provisión de la máquina con este SO. Probé algunos roles más para otros SO's, pero siempre acababa teniendo algunos problemas de configuración y éste fue el que mejor se adaptaba a mis necesidades. Por otra parte, encontré artículos en los que se menciona que esta sistema operativo es muy adecuado tales como: [este](https://www.quora.com/Which-is-the-best-operating-system-for-MongoDB-and-Hadoop), [este otro](https://www.percona.com/blog/2017/07/19/blog-poll-what-operating-system-do-you-run-your-development-database-on/) y [también este](https://docs.mongodb.com/manual/administration/production-notes/). El último enlace pertenece a la página oficial de MongoDB y se puede apreciar como Ubuntu Server 16.04 LTS tiene una cobertura de soporte total, un factor positivo a tener muy en cuenta, ya que durante la configuración tuve problemas que pude resolver gracias a su documentación y comunidad.
+El sistema operativo que decidí para esto fue Ubuntu Server 16.04 LTS. El principal motivo, es que encontré un rol de Ansible que funcionaba perfectamente para la provisión de la máquina con este SO. Probé algunos roles más para otros SO's, pero siempre acababa teniendo algunos problemas de configuración y éste fue el que mejor se adaptaba a mis necesidades. Por otra parte, encontré artículos en los que se menciona que este sistema operativo es muy adecuado tales como: [este](https://www.quora.com/Which-is-the-best-operating-system-for-MongoDB-and-Hadoop), [este otro](https://www.percona.com/blog/2017/07/19/blog-poll-what-operating-system-do-you-run-your-development-database-on/) y [también este](https://docs.mongodb.com/manual/administration/production-notes/). El último enlace pertenece a la página oficial de MongoDB y se puede apreciar como Ubuntu Server 16.04 LTS tiene una cobertura de soporte total, un factor positivo a tener muy en cuenta, ya que durante la configuración tuve problemas que pude resolver gracias a su documentación y comunidad.
 
 Sin embargo, tuve que modificar el [rol de Ansible](https://github.com/Ilyes512/ansible-role-mongodb) que utilicé para poder instalar MongoDB. La causa era que, por defecto, este rol escribía en /etc/mongod.conf la línea `bindIp: 0.0.0.0`. Esto es algo peligroso, ya que le abro la puerta a todo Internet para que pueda acceder a mi base de datos. Por ello, entre en [este archivo del rol](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/orquestacion/roles/ilyes512.mongodb/tasks/main.yml) y modifiqué esa tarea para que pusiera en su lugar `bindIp: 127.0.0.1,10.0.0.5`. De esta forma, solo puede ser accedida por localhost desde la propia máquina y por a otra máquina con el servicio REST que comparten una misma subnet virtual (hablaremos con mayor detalle de ésto más adelante).
 
@@ -64,7 +64,7 @@ Para conectarnos a la máquina después de haber sido creada solo hay que hacer:
 
 #### Máquina para el servicio de mongoDB
 
-El proceso es muy similar al de la máquina anterior. Por ello creo que lo más importante a destacar es que, si indicamos el mismo nombre de recursos y mismo nombre de red virtual, esto no sgnifica que cada una tenga una red y grupo de recursos distintas con el mismo nombre. Lo que quiere decir, es que ambas máquinas van a compartirlas. tal y como se puede apreciar en la siguiente imagen:
+El proceso es muy similar al de la máquina anterior. Por ello creo que lo más importante a destacar es que, si indicamos el mismo nombre de recursos y mismo nombre de red virtual, esto no significa que cada una tenga una red y grupo de recursos distintas con el mismo nombre. Lo que quiere decir, es que ambas máquinas van a compartirlas. Tal y como se puede apreciar en la siguiente imagen:
 
 ![subnet](figuras/hito5/subnet.png)
 
