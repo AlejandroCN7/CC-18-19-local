@@ -103,6 +103,15 @@ También realizaremos el provisionamiento automático de la máquina reutilizand
 
 Para más información [aquí](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/docs/automatizaci%C3%B3n.md).
 
+## Orquestación de máquinas virtuales
+
+---
+Despliegue Vagrant: mv.servicioclo.ud
+
+En este hito vamos a hablar sobre la orquestación de dos máquinas virtuales para poner en funcionamiento nuestro conjunto de microservicios. Para ello, haremos uso una vez más de [Azure](https://azure.microsoft.com/es-es/), pero esta vez, utilizando [Vagrant](https://www.vagrantup.com/) para este proceso de orquestación anteriormente mencionado. Hasta este momento, solo hacía uso de una máquina virtual, por lo que he tenido que ampliar el proyecto para tener la posibilidad de utilizar, al menos, dos máquinas virtuales y que este trabajo tenga sentido a nivel de infraestructura, hablaremos de esto en mayor detalle porsteriormente. También se ha realizado pruebas de orquestación a otra alumna y ella ha realizado una prueba de orquestación con mi proyecto.
+
+Para más información [aquí]()
+
 ## Licencia
 
 ---

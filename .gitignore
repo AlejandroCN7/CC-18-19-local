@@ -104,4 +104,7 @@ venv.bak/
 .mypy_cache/
 
 # Extensiones para los playbooks de ansible
-.retry
+*.retry
+
+# Vagrant
+.vagrant
