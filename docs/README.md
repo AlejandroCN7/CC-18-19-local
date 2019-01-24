@@ -487,7 +487,7 @@ He probado a orquestar dos máquinas a través del repositorio de @andreamorgar.
 ## Contenedores para despliegue en la nube
 
 ---
-Contenedor: 13.83.23.239
+Contenedor: http://13.83.23.239/
 Mi Docker Hub: https://hub.docker.com/r/alejandrocn7/proyecto_cloud_computing
 
 En este hito, vamos a hacer el despliegue de nuestro proyecto utilizando para ello contenedores [Docker](https://www.docker.com/). Para poder manejar las distintas imágenes que vamos a probar y ver en esta documentación, haremos buen uso de la [línea de ordenes docker](https://docs.docker.com/engine/reference/commandline/cli/). De esta forma podremos crear nuestras propias imágenes o descargarlas de Internet para usarlas en nuestros posteriores contenedores. Junto con muchas más funcionalidad que nos permite visualizar las imágenes almacenadas localmente, eliminarlas, crear contenedores para ellas, etc.
