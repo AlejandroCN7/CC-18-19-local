@@ -116,10 +116,11 @@ Para más información [aquí](https://github.com/AlejandroCN7/Proyecto-Cloud-Co
 
 ---
 Contenedor: 13.83.23.239
+Mi Docker Hub: https://hub.docker.com/r/alejandrocn7/proyecto_cloud_computing
 
-En este hito, vamos a hacer el despliegue de nuestro proyecto utilizando para ello contenedores [Docker](https://www.docker.com/). Para poder manejar las distintas imágenes que vamos a probar y ver en esta documentación, haremos buen uso de la [línea de ordenes docker](https://docs.docker.com/engine/reference/commandline/cli/). De esta forma podremos crear nuestras propias imágenes o descargarlas de Internet para usarlas en nuestros posteriores contenedores. Junto con muchas más funcionalidad que nos permite visualizar las imágenes almacenadas localmente, eliminarlas, crear contenedores para ellas, etc.
+En este hito, vamos a hacer el despliegue de nuestro proyecto utilizando para ello "tapers" [Docker](https://www.docker.com/). Para poder manejar las distintas imágenes que vamos a probar y ver en esta documentación, haremos buen uso de la [línea de ordenes docker](https://docs.docker.com/engine/reference/commandline/cli/). De esta forma podremos crear nuestras propias imágenes o descargarlas de Internet para usarlas en nuestros posteriores tapers. Junto con muchas más funcionalidad que nos permite visualizar las imágenes almacenadas localmente, eliminarlas, crear tapers para ellas, etc.
 
-La idea que he seguido es la de alojar la imagen producida a través de un Dockerfile propio a [Docker Hub](https://hub.docker.com/). Una vez subida ahí, es fácil poder descargarse nuestra imagen desde internet y lo utilizamos para poder indicársela a Azure para poder desplegarla fácilmente. El repositorio que he creado es https://hub.docker.com/r/alejandrocn7/proyecto_cloud_computing para subir mis imágenes.
+La idea que he seguido es la de alojar la imagen producida a través de un Dockerfile propio a [Docker Hub](https://hub.docker.com/). Una vez subida ahí, es fácil poder descargarse nuestra imagen desde Internet y lo utilizamos para poder indicársela a Azure para poder desplegarla fácilmente. 
 
 Para más información [aquí](https://github.com/AlejandroCN7/Proyecto-Cloud-Computing/blob/master/docs/docker.md).
 
