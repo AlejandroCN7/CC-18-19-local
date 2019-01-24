@@ -14,7 +14,6 @@ ENV MLAB yes
 #Copiamos los directorios necesarios para que funcione el servicio web.
 COPY ./principal.py  principal.py
 COPY ./mongoDB.py  mongoDB.py
-COPY ./mongoDB_config.py  mongoDB_config.py
 COPY ./model.py  model.py
 COPY ./requirements.txt requirements.txt
 
