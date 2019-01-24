@@ -21,6 +21,8 @@ logging.basicConfig(filename='app.log', filemode='a',format='%(asctime)s - %(nam
 # Si se trata de una prueba de travis debe de hacerlo en local
 if('TRAVIS' in os.environ):
     mongo = BaseDatos("mongodb://127.0.0.1:27017/MiBaseDatos", True)
+elif('MLAB' in os.environ):
+    mongo = BaseDatos("mongodb://AlejandroCC:" + os.environ.get('MLABPASS') + "@ds026018.mlab.com:26018/jugadores",True)
 else:
     mongo = BaseDatos("mongodb://10.0.0.5:27017/MiBaseDatos",False)
 

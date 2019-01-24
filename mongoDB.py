@@ -9,7 +9,10 @@ class BaseDatos:
         logging.info("MONGO:Tratando de conectar con la base de datos.")
         MONGODB_URI = direccion
         client = pymongo.MongoClient(MONGODB_URI, connectTimeoutMS=40000)
-        db = client["MiBaseDatos"]
+        if ('MLAB' in os.environ):
+            db = client["jugadores"]
+        else:
+            db = client["MiBaseDatos"]
         if (not prueba):
             self.jugadores = db.jugadores
         else:
