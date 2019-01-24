@@ -87,7 +87,7 @@ class Jugadores(Resource):
         mongo.removeJugadores()
         return '',204
 
-api.add_resource(Principal,'/','/principal')
+api.add_resource(Principal,'/','/status')
 api.add_resource(Jugadores,'/jugadores')
 api.add_resource(JugadorIndividual,'/jugadores/<string:ruta>')
 
